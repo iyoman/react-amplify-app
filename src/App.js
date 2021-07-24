@@ -1,13 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
+import React from 'react';
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+
+const App = () => (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Welcome to Hexatank!
         </p>
         <a
           className="App-link"
@@ -18,8 +20,8 @@ function App() {
           Learn React
         </a>
       </header>
+      <AmplifySignOut />
     </div>
-  );
-}
+);
 
-export default App;
+export default withAuthenticator(App);

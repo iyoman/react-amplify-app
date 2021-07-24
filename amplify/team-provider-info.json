@@ -1,0 +1,33 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplify2b1d0d75c17a4-staging-161642-authRole",
+      "UnauthRoleArn": "arn:aws:iam::299795705192:role/amplify-amplify2b1d0d75c17a4-staging-161642-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::299795705192:role/amplify-amplify2b1d0d75c17a4-staging-161642-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-amplify2b1d0d75c17a4-staging-161642-deployment",
+      "UnauthRoleName": "amplify-amplify2b1d0d75c17a4-staging-161642-unauthRole",
+      "StackName": "amplify-amplify2b1d0d75c17a4-staging-161642",
+      "StackId": "arn:aws:cloudformation:us-east-1:299795705192:stack/amplify-amplify2b1d0d75c17a4-staging-161642/33f23870-eb08-11eb-b4fe-0ec209969e4d",
+      "AmplifyAppId": "d2gve81f5nugwv"
+    },
+    "categories": {
+      "auth": {
+        "hexatank0b328a6d": {},
+        "hexatank": {
+          "userPoolId": "us-east-1_j5sqtyR6Z",
+          "userPoolName": "hexappbb93144d_userpool_bb93144d-dev",
+          "webClientId": "4jahtdtg7vmafscuunut6lg4vr",
+          "nativeClientId": "4jahtdtg7vmafscuunut6lg4vr",
+          "identityPoolId": "us-east-1:56ad217a-cb30-47e6-bd18-0bdccafa34be",
+          "identityPoolName": "hexappbb93144d_identitypool_bb93144d__dev",
+          "allowUnauthenticatedIdentities": false,
+          "authRoleArn": "arn:aws:iam::299795705192:role/amplify-hexapp-dev-120819-authRole",
+          "authRoleName": "amplify-hexapp-dev-120819-authRole",
+          "unauthRoleArn": "arn:aws:iam::299795705192:role/amplify-hexapp-dev-120819-unauthRole",
+          "unauthRoleName": "amplify-hexapp-dev-120819-unauthRole"
+        }
+      }
+    }
+  }
+}
