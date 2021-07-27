@@ -8,7 +8,10 @@ import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
 Amplify.configure(awsconfig);
 
-let user = await Auth.currentAuthenticatedUser();
+Auth.currentAuthenticatedUser({
+  bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+}).then(user => console.log(user))
+.catch(err => console.log(err));
 
 const App = () => (
   <div className="App">
@@ -23,7 +26,7 @@ const App = () => (
 );
 
 window.onload = function(){
-  document.getElementById('printuser').innerHTML = user;
+  document.getElementById('printuser').innerHTML = "not done yet";
 };
 
 export default withAuthenticator(App);
