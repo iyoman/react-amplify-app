@@ -18,6 +18,9 @@ function App() {
         <p>
           Welcome to Hexatank!
         </p>
+        <button onClick={() => Auth.federatedSignIn({ provider: 'Google' })}>
+          Sign in with Google
+        </button>
         <button onClick={checkUser}>
           Check the current user
         </button>
@@ -29,4 +32,4 @@ function App() {
 
 }
 
-export default withAuthenticator(App, true);
+export default App
