@@ -7,8 +7,6 @@ import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
 Amplify.configure(awsconfig);
 
-import { Auth } from 'aws-amplify';
-
 
 function App() {
   async function checkUser() {
