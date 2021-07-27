@@ -9,6 +9,7 @@ function App() {
   async function checkUser() {
     const user = await Auth.currentAuthenticatedUser();
     console.log("user: ", user)
+    document.getElementById("printuser").innerHTML = user["attributes"]["email"]
   }
   return (
     <div className="App">
