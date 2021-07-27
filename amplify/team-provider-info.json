@@ -13,7 +13,20 @@
     },
     "categories": {
       "auth": {
-        "hexatank0b328a6d": {}
+        "hexatank0b328a6d": {},
+        "hexatank": {
+          "userPoolId": "us-east-1_j5sqtyR6Z",
+          "userPoolName": "hexappbb93144d_userpool_bb93144d-dev",
+          "webClientId": "4jahtdtg7vmafscuunut6lg4vr",
+          "nativeClientId": "4jahtdtg7vmafscuunut6lg4vr",
+          "identityPoolId": "us-east-1:56ad217a-cb30-47e6-bd18-0bdccafa34be",
+          "identityPoolName": "hexappbb93144d_identitypool_bb93144d__dev",
+          "allowUnauthenticatedIdentities": false,
+          "authRoleArn": "arn:aws:iam::299795705192:role/amplify-hexapp-dev-120819-authRole",
+          "authRoleName": "amplify-hexapp-dev-120819-authRole",
+          "unauthRoleArn": "arn:aws:iam::299795705192:role/amplify-hexapp-dev-120819-unauthRole",
+          "unauthRoleName": "amplify-hexapp-dev-120819-unauthRole"
+        }
       }
     }
   }

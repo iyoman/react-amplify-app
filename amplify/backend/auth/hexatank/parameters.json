@@ -1,0 +1,6 @@
+{
+  "authSelections": "identityPoolAndUserPool",
+  "resourceName": "hexatank",
+  "serviceType": "imported",
+  "region": "us-east-1"
+}

@@ -3,33 +3,25 @@ import './App.css';
 
 import React from 'react';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
-import Amplify, { Auth } from 'aws-amplify';
 
-
-function App() {
-  async function checkUser() {
-    const user = await Auth.currentAuthenticatedUser();
-    console.log("user: ", user)
-  }
-  return (
+const App = () => (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Welcome to Hexatank!
         </p>
-        <button onClick={() => Auth.federatedSignIn({ provider: 'Google' })}>
-          Sign in with Google
-        </button>
-        <button onClick={checkUser}>
-          Check the current user
-        </button>
-        <p id="printuser"></p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
       </header>
-      <p id="nothead">not a header</p>
+      <AmplifySignOut />
     </div>
-  )
+);
 
-}
-
-export default App
+export default withAuthenticator(App);
