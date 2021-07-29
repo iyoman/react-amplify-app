@@ -7,5 +7,11 @@
       "dependsOn": [],
       "customAuth": false
     }
+  },
+  "storage": {
+    "amplifystorage": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }
