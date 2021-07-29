@@ -43,6 +43,7 @@ function App() {
     console.log("user: ", user)
     document.getElementById("printuser").innerHTML = "Signed in as " + user["attributes"]["email"]
   }
+
   var file
   async function onChange(e) {
     file = e.target.files[0];
@@ -61,10 +62,18 @@ function App() {
     }
   }
 
+  var filelist
+  var keylist
   async function listfiles() {
+    keylist = []
     Storage.list('', { level: 'private' })
-    .then(result => console.log(result))
+    .then(result => filelist = result)
     .catch(err => console.log(err));
+    for (let i = 0; i < filelist.length; i++) {
+      keylist.push(array[i]["key"])
+    }
+    const listItems = keylist.map((key) => <li>{key}</li>)
+    document.getElementById("filelist").innerHTML = {listItems}
   }
 
   return (
@@ -89,6 +98,7 @@ function App() {
         <button onClick={listfiles}>
           List your Files
         </button>
+        <ul id="filelist"></ul>
       </header>
       <AmplifySignOut />
     </div>
