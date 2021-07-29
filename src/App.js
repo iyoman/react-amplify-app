@@ -73,6 +73,7 @@ function App() {
     for (let i = 0; i < filelist.length; i++) {
       keylist.push(filelist[i]["key"])
     }
+    console.log(keylist)
     const listItems = keylist.map((key) => <li>{key}</li>)
     document.getElementById("filelist").innerHTML = {listItems}
   }
@@ -106,7 +107,5 @@ function App() {
   )
 
 }
-
-
 
 export default withAuthenticator(App, true);
