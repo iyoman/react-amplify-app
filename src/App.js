@@ -76,9 +76,7 @@ function App() {
     let filesrc = ""
     filelisthtml = ""
     for (let i = 0; i < files.length; i++) {
-      getfile(files[i]["key"])
-        .then(result => filesrc = result)
-        .catch(err => console.log(err))
+      filesrc = getfile(files[i]["key"])
       console.log(filesrc)
       filelisthtml += '<li>File Name: ' + files[i]["key"] +'<img id="listimg" src='+filesrc+'></img>' + '</li>'
     }
@@ -86,10 +84,11 @@ function App() {
   }
 
   async function getfile(path) {
-    const signedURL = await Storage.get(path, {
-      level: 'private', // defaults to `public`
-      download: false, // defaults to false
-    });
+    let signedURL = ""
+    Storage.get(path, {level: 'private', download: false})
+      .then(result => signedURL = result)
+      .catch(err => console.log(err));
+    console.log(signedURL)
     return signedURL
   }
 
