@@ -55,7 +55,7 @@ function App() {
         level: 'private',
         progressCallback(progress) {
           console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
-    },
+        },
       });
     } catch (error) {
       console.log('Error uploading file: ', error);
@@ -64,19 +64,28 @@ function App() {
 
   var filelisthtml = ""
   async function listfileshandler() {
+    
     Storage.list('', { level: 'private' })
-    .then(result => listfiles(result))
-    .catch(err => console.log(err));
+      .then(result => listfiles(result))
+      .catch(err => console.log(err));
   }
 
   async function listfiles(files) {
     console.log(files)
-
+    getfile(files[0]["key"])
     filelisthtml = ""
     for (let i = 0; i < files.length; i++) {
-      filelisthtml += '<li>'+files[i]["key"]+'</li>'
+      filelisthtml += '<li>' + files[i]["key"] + '</li>'
     }
     document.getElementById("filelist").innerHTML = filelisthtml
+  }
+
+  async function getfile(path) {
+    const signedURL = await Storage.get(path, {
+      level: 'private', // defaults to `public`
+      download: false, // defaults to false
+    });
+    document.getElementById("testimg").src = signedURL
   }
 
   return (
