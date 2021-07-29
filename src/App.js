@@ -72,10 +72,10 @@ function App() {
 
   async function listfiles(files) {
     console.log(files)
-    getfile(files[0]["key"])
+    
     filelisthtml = ""
     for (let i = 0; i < files.length; i++) {
-      filelisthtml += '<li>' + files[i]["key"] + '</li>'
+      filelisthtml += '<li>File Name: ' + files[i]["key"] +'<img id="listimg" src='+getfile(files[i]["key"])+'></img>' + '</li>'
     }
     document.getElementById("filelist").innerHTML = filelisthtml
   }
@@ -85,7 +85,7 @@ function App() {
       level: 'private', // defaults to `public`
       download: false, // defaults to false
     });
-    document.getElementById("testimg").src = signedURL
+    return signedURL
   }
 
   return (
