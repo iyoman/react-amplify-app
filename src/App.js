@@ -41,7 +41,7 @@ function App() {
   async function checkUser() {
     const user = await Auth.currentAuthenticatedUser();
     console.log("user: ", user)
-    document.getElementById("printuser").innerHTML = "Signed in as" + user["attributes"]["email"]
+    document.getElementById("printuser").innerHTML = "Signed in as " + user["attributes"]["email"]
   }
   var file
   async function onChange(e) {
@@ -51,7 +51,7 @@ function App() {
   async function uploadfile() {
     try {
       await Storage.put(file.name, file, {
-        level: 'protected',
+        level: 'private',
         progressCallback(progress) {
           console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
     },
@@ -62,7 +62,7 @@ function App() {
   }
 
   async function listfiles() {
-    Storage.list('photos/', { level: 'private' })
+    Storage.list('', { level: 'private' })
     .then(result => console.log(result))
     .catch(err => console.log(err));
   }
