@@ -79,7 +79,7 @@ function App() {
       getfile(files[i]["key"])
         .then(result => filesrc = result)
         .catch(err => console.log(err))
-      
+      console.log(filesrc)
       filelisthtml += '<li>File Name: ' + files[i]["key"] +'<img id="listimg" src='+filesrc+'></img>' + '</li>'
     }
     document.getElementById("filelist").innerHTML = filelisthtml
