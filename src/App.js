@@ -62,17 +62,19 @@ function App() {
     }
   }
 
-  var filelist = {}
   var filelisthtml = ""
-  async function listfiles() {
+  async function listfileshandler() {
     Storage.list('', { level: 'private' })
-    .then(result => filelist = result)
+    .then(result => listfiles(result))
     .catch(err => console.log(err));
-    console.log(filelist)
+  }
+
+  async function listfiles(files) {
+    console.log(files)
 
     filelisthtml = ""
-    for (let i = 0; i < filelist.length; i++) {
-      filelisthtml += '<li>'+filelist[i]["key"]+'</li>'
+    for (let i = 0; i < files.length; i++) {
+      filelisthtml += '<li>'+files[i]["key"]+'</li>'
     }
     document.getElementById("filelist").innerHTML = filelisthtml
   }
@@ -96,8 +98,8 @@ function App() {
         <button onClick={uploadfile} class="inline">
           Upload File
         </button>
-        
-        <button onClick={listfiles}>
+        <img id="testimg"></img>
+        <button onClick={listfileshandler}>
           List your Files
         </button>
         <ul id="filelist"></ul>
