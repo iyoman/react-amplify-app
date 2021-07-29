@@ -73,7 +73,7 @@ function App() {
 
   async function listfiles(files) {
     console.log(files)
-    
+    let filesrc = ""
     filelisthtml = ""
     for (let i = 0; i < files.length; i++) {
       filesrc = getfile(files[i]["key"])
