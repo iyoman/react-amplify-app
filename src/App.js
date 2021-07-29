@@ -7,7 +7,7 @@ import { Auth } from 'aws-amplify'
 import { Storage } from 'aws-amplify'
 import { Hub, Logger } from 'aws-amplify';
 
-const logger = new Logger('My-Logger');
+const logger = new Logger('My-Logger', "INFO");
 
 const listener = (data) => {
   switch (data.payload.event) {
@@ -35,23 +35,31 @@ const listener = (data) => {
 }
 
 function App() {
+
   Hub.listen('auth', listener);
   async function checkUser() {
     const user = await Auth.currentAuthenticatedUser();
     console.log("user: ", user)
     document.getElementById("printuser").innerHTML = user["attributes"]["email"]
   }
+  var file
   async function onChange(e) {
-    const file = e.target.files[0];
+    file = e.target.files[0];
+  }
+
+  async function uploadfile() {
     try {
-      await Storage.put('test.txt', 'Protected Content by Isaac', {
+      await Storage.put(file.name, file, {
         level: 'protected',
-        contentType: 'text/plain'
+        progressCallback(progress) {
+          console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+    },
       });
     } catch (error) {
       console.log('Error uploading file: ', error);
     }
   }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -67,6 +75,9 @@ function App() {
           type="file"
           onChange={onChange}
         />
+        <button onClick={uploadfile} class="inline">
+          Upload File
+        </button>
       </header>
       <AmplifySignOut />
     </div>
