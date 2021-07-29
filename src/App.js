@@ -69,6 +69,7 @@ function App() {
     Storage.list('', { level: 'private' })
     .then(result => filelist = result)
     .catch(err => console.log(err));
+    console.log(filelist)
     for (let i = 0; i < filelist.length; i++) {
       keylist.push(filelist[i]["key"])
     }
