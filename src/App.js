@@ -10,6 +10,7 @@ import { Hub, Logger } from 'aws-amplify';
 const logger = new Logger('My-Logger', "INFO");
 
 const listener = (data) => {
+  console.log(data.payload.event)
   switch (data.payload.event) {
     case 'signIn':
       console.log("signed in");
@@ -75,7 +76,8 @@ function App() {
     
     filelisthtml = ""
     for (let i = 0; i < files.length; i++) {
-      filelisthtml += '<li>File Name: ' + files[i]["key"] +'<img id="listimg" src='+getfile(files[i]["key"])+'></img>' + '</li>'
+      filesrc = getfile(files[i]["key"])
+      filelisthtml += '<li>File Name: ' + files[i]["key"] +'<img id="listimg" src='+filesrc+'></img>' + '</li>'
     }
     document.getElementById("filelist").innerHTML = filelisthtml
   }
@@ -107,7 +109,6 @@ function App() {
         <button onClick={uploadfile} class="inline">
           Upload File
         </button>
-        <img id="testimg"></img>
         <button onClick={listfileshandler}>
           List your Files
         </button>
