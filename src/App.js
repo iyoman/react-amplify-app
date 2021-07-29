@@ -4,8 +4,38 @@ import './App.css';
 import React from 'react';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify'
+import { Storage } from 'aws-amplify'
+import { Hub, Logger } from 'aws-amplify';
+
+const logger = new Logger('My-Logger');
+
+const listener = (data) => {
+    switch (data.payload.event) {
+        case 'signIn':
+            logger.info('user signed in');
+            break;
+        case 'signUp':
+            logger.info('user signed up');
+            break;
+        case 'signOut':
+            logger.info('user signed out');
+            break;
+        case 'signIn_failure':
+            logger.error('user sign in failed');
+            break;
+        case 'tokenRefresh':
+            logger.info('token refresh succeeded');
+            break;
+        case 'tokenRefresh_failure':
+            logger.error('token refresh failed');
+            break;
+        case 'configured':
+            logger.info('the Auth module is configured');
+    }
+}
 
 function App() {
+  Hub.listen('auth', listener);
   async function checkUser() {
     const user = await Auth.currentAuthenticatedUser();
     console.log("user: ", user)
@@ -23,10 +53,12 @@ function App() {
         </button>
         <p id="printuser"></p>
       </header>
-      <p id="nothead">not a header</p>
+      <AmplifySignOut />
     </div>
   )
 
 }
+
+
 
 export default withAuthenticator(App, true);

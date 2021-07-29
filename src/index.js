@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import Amplify, { Auth } from 'aws-amplify';
+import { Storage } from 'aws-amplify'
 import awsconfig from './aws-exports';
 Amplify.configure(awsconfig);
 
