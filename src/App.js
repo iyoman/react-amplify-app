@@ -12,7 +12,7 @@ const logger = new Logger('My-Logger', "INFO");
 const listener = (data) => {
   switch (data.payload.event) {
     case 'signIn':
-      logger.info('user signed in');
+      console.log("signed in");
       break;
     case 'signUp':
       logger.info('user signed up');
@@ -37,10 +37,11 @@ const listener = (data) => {
 function App() {
 
   Hub.listen('auth', listener);
+
   async function checkUser() {
     const user = await Auth.currentAuthenticatedUser();
     console.log("user: ", user)
-    document.getElementById("printuser").innerHTML = user["attributes"]["email"]
+    document.getElementById("printuser").innerHTML = "Signed in as" + user["attributes"]["email"]
   }
   var file
   async function onChange(e) {
@@ -60,6 +61,12 @@ function App() {
     }
   }
 
+  async function listfiles() {
+    Storage.list('photos/', { level: 'private' })
+    .then(result => console.log(result))
+    .catch(err => console.log(err));
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -73,10 +80,14 @@ function App() {
         <p id="printuser"></p>
         <input
           type="file"
+          class="inline"
           onChange={onChange}
         />
         <button onClick={uploadfile} class="inline">
           Upload File
+        </button>
+        <button onClick={listfiles}>
+          List your Files
         </button>
       </header>
       <AmplifySignOut />
