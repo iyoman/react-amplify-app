@@ -70,7 +70,7 @@ function App() {
     .then(result => filelist = result)
     .catch(err => console.log(err));
     for (let i = 0; i < filelist.length; i++) {
-      keylist.push(array[i]["key"])
+      keylist.push(filelist[i]["key"])
     }
     const listItems = keylist.map((key) => <li>{key}</li>)
     document.getElementById("filelist").innerHTML = {listItems}
