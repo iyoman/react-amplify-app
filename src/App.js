@@ -77,6 +77,7 @@ function App() {
     filelisthtml = ""
     for (let i = 0; i < files.length; i++) {
       filesrc = getfile(files[i]["key"])
+      console.log(filesrc)
       filelisthtml += '<li>File Name: ' + files[i]["key"] +'<img id="listimg" src='+filesrc+'></img>' + '</li>'
     }
     document.getElementById("filelist").innerHTML = filelisthtml
@@ -112,6 +113,7 @@ function App() {
         <button onClick={listfileshandler}>
           List your Files
         </button>
+        <p>---------Files---------</p>
         <ul id="filelist"></ul>
       </header>
       <AmplifySignOut />
