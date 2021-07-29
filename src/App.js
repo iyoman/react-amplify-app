@@ -76,8 +76,10 @@ function App() {
     let filesrc = ""
     filelisthtml = ""
     for (let i = 0; i < files.length; i++) {
-      filesrc = getfile(files[i]["key"])
-      console.log(filesrc)
+      getfile(files[i]["key"])
+        .then(result => filesrc = result)
+        .catch(err => console.log(err))
+      
       filelisthtml += '<li>File Name: ' + files[i]["key"] +'<img id="listimg" src='+filesrc+'></img>' + '</li>'
     }
     document.getElementById("filelist").innerHTML = filelisthtml
