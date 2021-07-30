@@ -76,9 +76,7 @@ function App() {
     let filesrc = ""
     filelisthtml = ""
     for (let i = 0; i < files.length; i++) {
-      getfile(files[i]["key"])
-        .then(result => filesrc = result)
-        .catch(err => console.log(err))
+      filesrc = await getfile(files[i]["key"])
       console.log(filesrc)
       filelisthtml += '<li>File Name: ' + files[i]["key"] +'<img id="listimg" src='+filesrc+'></img>' + '</li>'
     }
