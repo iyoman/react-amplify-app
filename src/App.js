@@ -43,7 +43,7 @@ function App() {
   async function checkUser() {
     await Auth.currentAuthenticatedUser()
       .then(result => user = result)
-      .then(document.getElementById("printuser").innerHTML = "Signed in as " + result["attributes"]["email"])
+      .then(document.getElementById("printuser").innerHTML = "Signed in as " + user["attributes"]["email"])
       .then(logger.debug("user: ", user))
       .catch(err => console.log(err))
   }
