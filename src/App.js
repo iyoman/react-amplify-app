@@ -87,9 +87,10 @@ function App() {
     let filesrc = ""
     filelisthtml = ""
     for (let i = 0; i < files.length; i++) {
-      filesrc = await getfile(files[i]["key"])
-      console.log(filesrc)
-      filelisthtml += '<li>File Name: ' + files[i]["key"] +' - <img id="listimg" src='+filesrc+'></img><button onClick={"removefile('+files[i]["key"]+')"} class="inline">Remove File</button></li>'
+      const key = files[i]["key"]
+      const quotekey = "\""+key+"\""
+      filesrc = await getfile(key)
+      filelisthtml += '<li>File Name: ' + key +' - <img id="listimg" src='+filesrc+'></img><button onClick={"removefile('+quotekey+')"} class="inline">Remove File</button></li>'
     }
     document.getElementById("status").innerHTML = "Retrieved "+files.length+" files"
     document.getElementById("filelist").innerHTML = filelisthtml
