@@ -92,7 +92,7 @@ function App() {
       const key = files[i]["key"]
       const quotekey = "\""+key+"\""
       filesrc = await getfile(key)
-      filelisthtml += '<li>File Name: ' + key +' - <img id="listimg" src='+filesrc+'></img><button onClick={removefile('+quotekey+')} class="inline">Remove File</button></li>'
+      filelisthtml += '<li>File Name: ' + key +' - <img id="listimg" src='+filesrc+'></img><button onClick={removefile('+quotekey+')} class="inline" id="stylebutton">Remove File</button></li>'
       filekeyslist.push(key)
     }
     document.getElementById("status").innerHTML = "Retrieved "+files.length+" files"
@@ -138,10 +138,10 @@ function App() {
           class="inline"
           onChange={onChange}
         />
-        <button onClick={uploadfile} class="inline">
+        <button onClick={uploadfile} class="inline" id="stylebutton">
           Upload File
         </button>
-        <button onClick={listfileshandler}>
+        <button onClick={listfileshandler} id="stylebutton">
           List your Files
         </button>
         <p id="status"></p>
