@@ -102,7 +102,8 @@ function App() {
       const elem = listelems[i];
       let button = document.createElement("button")
       button.innerText = "Remove File"
-      button.innerHTML = 'class="inline" id="stylebutton"'
+      button.class = "inline"
+      button.id = "stylebutton"
       button.onclick = 'removefile('+elem.id+')'
       elem.appendChild(button)
     }
