@@ -92,7 +92,7 @@ function App() {
       const key = files[i]["key"]
       const quotekey = "\"" + key + "\""
       filesrc = await getfile(key)
-      filelisthtml += '<li id=' + key + '>File Name: ' + key + ' - <img id="listimg" src=' + filesrc + '></img></li>'
+      filelisthtml += '<li id=' + quotekey + '>File Name: ' + key + ' - <img id="listimg" src=' + filesrc + '></img></li>'
       filekeyslist.push(key)
     }
     document.getElementById("status").innerHTML = "Retrieved " + files.length + " files"
