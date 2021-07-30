@@ -90,7 +90,7 @@ function App() {
       const key = files[i]["key"]
       const quotekey = "\""+key+"\""
       filesrc = await getfile(key)
-      filelisthtml += '<li>File Name: ' + key +' - <img id="listimg" src='+filesrc+'></img><button onClick={"removefile('+quotekey+')"} class="inline">Remove File</button></li>'
+      filelisthtml += '<li>File Name: ' + key +' - <img id="listimg" src='+filesrc+'></img><button onClick={removefile('+quotekey+')} class="inline">Remove File</button></li>'
     }
     document.getElementById("status").innerHTML = "Retrieved "+files.length+" files"
     document.getElementById("filelist").innerHTML = filelisthtml
