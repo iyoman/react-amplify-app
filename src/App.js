@@ -82,15 +82,18 @@ function App() {
       .catch(err => console.log(err));
   }
 
+  let filekeyslist = []
   async function listfiles(files) {
     console.log(files)
     let filesrc = ""
+    filekeyslist = []
     filelisthtml = ""
     for (let i = 0; i < files.length; i++) {
       const key = files[i]["key"]
       const quotekey = "\""+key+"\""
       filesrc = await getfile(key)
       filelisthtml += '<li>File Name: ' + key +' - <img id="listimg" src='+filesrc+'></img><button onClick={removefile('+quotekey+')} class="inline">Remove File</button></li>'
+      filekeyslist.push(key)
     }
     document.getElementById("status").innerHTML = "Retrieved "+files.length+" files"
     document.getElementById("filelist").innerHTML = filelisthtml
@@ -109,6 +112,7 @@ function App() {
     }
   }
 
+  
   async function removefile(path) {
     try {
       document.getElementById("status").innerHTML = "Removing "+path+"..."
@@ -119,6 +123,7 @@ function App() {
     }
     document.getElementById("status").innerHTML = "Removed"
   }
+  removefile("")
 
   return (
     <div className="App">
