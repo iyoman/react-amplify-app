@@ -39,15 +39,20 @@ function App() {
 
   Hub.listen('auth', listener);
 
-  var user
+  
   async function checkUser() {
     await Auth.currentAuthenticatedUser()
-      .then(result => user = result)
-      .then(document.getElementById("printuser").innerHTML = "Signed in as " + user["attributes"]["email"])
-      .then(logger.debug("user: ", user))
+      .then(result => userhandler(result))
       .catch(err => console.log(err))
   }
   checkUser()
+  
+  var user
+  function userhandler(result) {
+    user = result
+    document.getElementById("printuser").innerHTML = "Signed in as " + user["attributes"]["email"]
+    logger.debug("user: ", user)
+  }
 
   var file
   async function onChange(e) {
@@ -121,7 +126,7 @@ function App() {
         <p>
           Welcome to Hexatank!
         </p>
-        
+        <p id="printuser"></p>
         <input
           type="file"
           class="inline"
