@@ -39,14 +39,14 @@ function App() {
 
   Hub.listen('auth', listener);
 
-  
+
   async function checkUser() {
     await Auth.currentAuthenticatedUser()
       .then(result => userhandler(result))
       .catch(err => console.log(err))
   }
   checkUser()
-  
+
   var user
   function userhandler(result) {
     user = result
@@ -90,13 +90,22 @@ function App() {
     filelisthtml = ""
     for (let i = 0; i < files.length; i++) {
       const key = files[i]["key"]
-      const quotekey = "\""+key+"\""
+      const quotekey = "\"" + key + "\""
       filesrc = await getfile(key)
-      filelisthtml += '<li>File Name: ' + key +' - <img id="listimg" src='+filesrc+'></img><button onClick={removefile('+quotekey+')} class="inline" id="stylebutton">Remove File</button></li>'
+      filelisthtml += '<li id=' + key + '>File Name: ' + key + ' - <img id="listimg" src=' + filesrc + '></img></li>'
       filekeyslist.push(key)
     }
-    document.getElementById("status").innerHTML = "Retrieved "+files.length+" files"
+    document.getElementById("status").innerHTML = "Retrieved " + files.length + " files"
     document.getElementById("filelist").innerHTML = filelisthtml
+    let listelems = document.getElementById("filelist").children
+    for (let i = 0; i < listelems.length; i++) {
+      const elem = listelems[i];
+      let button = document.createElement("button")
+      button.innerText = "Remove File"
+      button.innerHTML = 'class="inline" id="stylebutton"'
+      button.onclick = removefile(elem.id)
+      elem.appendChild(button)
+    }
   }
 
   async function getfile(path) {
@@ -105,25 +114,23 @@ function App() {
         level: 'private', // defaults to `public`
         download: false, // defaults to false
       });
-      console.log("sign - "+signedURL)
+      console.log("sign - " + signedURL)
       return signedURL
     } catch (error) {
       console.log(error)
     }
   }
 
-  
   async function removefile(path) {
     try {
-      document.getElementById("status").innerHTML = "Removing "+path+"..."
+      document.getElementById("status").innerHTML = "Removing " + path + "..."
       const remove = await Storage.remove(path, { level: 'private' });
-      console.log("removing - "+remove)
+      console.log("removing - " + remove)
     } catch (error) {
       console.log(error)
     }
     document.getElementById("status").innerHTML = "Removed"
   }
-  removefile("")
 
   return (
     <div className="App">
