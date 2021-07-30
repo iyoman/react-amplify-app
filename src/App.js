@@ -7,7 +7,7 @@ import { Auth } from 'aws-amplify'
 import { Storage } from 'aws-amplify'
 import { Hub, Logger } from 'aws-amplify';
 
-const logger = new Logger('My-Logger', "INFO");
+const logger = new Logger('My-Logger');
 
 const listener = (data) => {
   console.log(data.payload.event)
@@ -39,11 +39,15 @@ function App() {
 
   Hub.listen('auth', listener);
 
+  var user
   async function checkUser() {
-    const user = await Auth.currentAuthenticatedUser();
-    console.log("user: ", user)
-    document.getElementById("printuser").innerHTML = "Signed in as " + user["attributes"]["email"]
+    await Auth.currentAuthenticatedUser()
+      .then(result => user = result)
+      .then(document.getElementById("printuser").innerHTML = "Signed in as " + result["attributes"]["email"])
+      .then(logger.debug("user: ", user))
+      .catch(err => console.log(err))
   }
+  checkUser()
 
   var file
   async function onChange(e) {
@@ -52,10 +56,12 @@ function App() {
 
   async function uploadfile() {
     try {
+      document.getElementById("status").innerHTML = "Uploading..."
       await Storage.put(file.name, file, {
         level: 'private',
         progressCallback(progress) {
           console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+          document.getElementById("status").innerHTML = `Uploaded: ${progress.loaded}/${progress.total}`
         },
       });
     } catch (error) {
@@ -65,7 +71,7 @@ function App() {
 
   var filelisthtml = ""
   async function listfileshandler() {
-    
+    document.getElementById("status").innerHTML = "Working..."
     Storage.list('', { level: 'private' })
       .then(result => listfiles(result))
       .catch(err => console.log(err));
@@ -78,8 +84,9 @@ function App() {
     for (let i = 0; i < files.length; i++) {
       filesrc = await getfile(files[i]["key"])
       console.log(filesrc)
-      filelisthtml += '<li>File Name: ' + files[i]["key"] +'</li><li><img id="listimg" src='+filesrc+'></img>' + '</li>'
+      filelisthtml += '<li>File Name: ' + files[i]["key"] +' - <img id="listimg" src='+filesrc+'></img><button onClick={removefile('+files[i]["key"]+')} class="inline">Remove File</button></li>'
     }
+    document.getElementById("status").innerHTML = "Retrieved "+files.length+" files"
     document.getElementById("filelist").innerHTML = filelisthtml
   }
 
@@ -96,6 +103,15 @@ function App() {
     }
   }
 
+  async function removefile(path) {
+    try {
+      const remove = await Storage.remove(path, { level: 'private' });
+      console.log("removing - "+remove)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -103,10 +119,7 @@ function App() {
         <p>
           Welcome to Hexatank!
         </p>
-        <button onClick={checkUser}>
-          Check the current user
-        </button>
-        <p id="printuser"></p>
+        
         <input
           type="file"
           class="inline"
@@ -118,6 +131,7 @@ function App() {
         <button onClick={listfileshandler}>
           List your Files
         </button>
+        <p id="status"></p>
         <p>---------Files---------</p>
         <ul id="filelist"></ul>
       </header>
