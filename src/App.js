@@ -84,7 +84,7 @@ function App() {
     for (let i = 0; i < files.length; i++) {
       filesrc = await getfile(files[i]["key"])
       console.log(filesrc)
-      filelisthtml += '<li>File Name: ' + files[i]["key"] +' - <img id="listimg" src='+filesrc+'></img><button onClick={removefile('+files[i]["key"]+')} class="inline">Remove File</button></li>'
+      filelisthtml += '<li>File Name: ' + files[i]["key"] +' - <img id="listimg" src='+filesrc+'></img><button onClick={"removefile('+files[i]["key"]+')"} class="inline">Remove File</button></li>'
     }
     document.getElementById("status").innerHTML = "Retrieved "+files.length+" files"
     document.getElementById("filelist").innerHTML = filelisthtml
@@ -105,11 +105,13 @@ function App() {
 
   async function removefile(path) {
     try {
+      document.getElementById("status").innerHTML = "Removing "+path+"..."
       const remove = await Storage.remove(path, { level: 'private' });
       console.log("removing - "+remove)
     } catch (error) {
       console.log(error)
     }
+    document.getElementById("status").innerHTML = "Removed"
   }
 
   return (
