@@ -79,19 +79,23 @@ function App() {
       getfile(files[i]["key"])
         .then(result => filesrc = result)
         .catch(err => console.log(err))
-      console.log(signedURL)
+      console.log(filesrc)
       filelisthtml += '<li>File Name: ' + files[i]["key"] +'<img id="listimg" src='+filesrc+'></img>' + '</li>'
     }
     document.getElementById("filelist").innerHTML = filelisthtml
   }
 
   async function getfile(path) {
-    const signedURL = await Storage.get(path, {
-      level: 'private', // defaults to `public`
-      download: false, // defaults to false
-    });
-    console.log("sign - "+signedURL)
-    return signedURL
+    try {
+      const signedURL = await Storage.get(path, {
+        level: 'private', // defaults to `public`
+        download: false, // defaults to false
+      });
+      console.log("sign - "+signedURL)
+      return signedURL
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
