@@ -103,7 +103,7 @@ function App() {
       let button = document.createElement("button")
       button.innerText = "Remove File"
       button.innerHTML = 'class="inline" id="stylebutton"'
-      button.onclick = removefile(elem.id)
+      button.onclick = 'removefile('+elem.id+')'
       elem.appendChild(button)
     }
   }
