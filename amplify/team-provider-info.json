@@ -10,6 +10,11 @@
       "UnauthRoleArn": "arn:aws:iam::299795705192:role/amplify-amplifya7ae579498c44-staging-183910-unauthRole",
       "AuthRoleArn": "arn:aws:iam::299795705192:role/amplify-amplifya7ae579498c44-staging-183910-authRole",
       "AmplifyAppId": "d2gve81f5nugwv"
+    },
+    "categories": {
+      "auth": {
+        "hexatank": {}
+      }
     }
   }
 }
